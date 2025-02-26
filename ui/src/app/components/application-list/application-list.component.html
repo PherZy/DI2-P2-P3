@@ -1,0 +1,57 @@
+<!-- src/app/components/application-list/application-list.component.html -->
+<div class="application-list">
+    <h2>Applications disponibles</h2>
+    
+    <div class="applications-container">
+      <div class="applications-table">
+        <table *ngIf="applications.length > 0">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Type</th>
+              <th>Algorithme de chiffrement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let app of applications">
+              <td>{{ app.name }}</td>
+              <td>{{ getApplicationTypeName(app.type) }}</td>
+              <td>{{ app.type === 1 ? 'AES' : 'RSA' }}</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div *ngIf="applications.length === 0" class="no-data">
+          Aucune application disponible.
+        </div>
+      </div>
+      
+      <div class="add-application">
+        <h3>Ajouter une application</h3>
+        
+        <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="name">Nom de l'application</label>
+            <input type="text" id="name" formControlName="name" class="form-control">
+            <div *ngIf="applicationForm.get('name')?.errors?.['required'] && applicationForm.get('name')?.touched" class="error">
+              Le nom de l'application est requis
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Type d'application</label>
+            <div class="radio-group">
+              <label>
+                <input type="radio" formControlName="type" [value]="1"> Grand public (AES)
+              </label>
+              <label>
+                <input type="radio" formControlName="type" [value]="2"> Professionnelle (RSA)
+              </label>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary" [disabled]="applicationForm.invalid">Ajouter</button>
+        </form>
+      </div>
+    </div>
+  </div>
