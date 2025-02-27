@@ -1,4 +1,3 @@
-// src/app/components/application-list/application-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';

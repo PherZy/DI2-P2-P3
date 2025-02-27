@@ -13,14 +13,12 @@ namespace BLL.Services
 
         public AESEncryption(string key, string iv)
         {
-            // Assurez-vous que la clé fait 32 octets (256 bits)
-            // SHA256 crée un hash de 32 octets, parfait pour AES-256
+
             using (var sha256 = SHA256.Create())
             {
                 _key = sha256.ComputeHash(Encoding.UTF8.GetBytes(key));
             }
 
-            // Assurez-vous que l'IV fait 16 octets (128 bits)
             using (var md5 = MD5.Create())
             {
                 _iv = md5.ComputeHash(Encoding.UTF8.GetBytes(iv));

@@ -20,7 +20,6 @@ namespace BLL.Services
                 _publicKey = RSA.Create();
                 _privateKey = RSA.Create();
 
-                // Vérifiez que les clés ne sont pas vides et sont au format correct
                 if (string.IsNullOrEmpty(publicKeyXml) || string.IsNullOrEmpty(privateKeyXml))
                     throw new ArgumentException("Les clés RSA ne peuvent pas être nulles ou vides");
 
